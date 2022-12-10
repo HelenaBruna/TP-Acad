@@ -1,3 +1,4 @@
+Drop schema if exists alunoAcademia;
 Create schema alunoAcademia;
 use alunoAcademia;
 
@@ -11,3 +12,6 @@ Create table alunoAcademia
     Objetivo text,
     constraint fk_alunoAcademia primary key (Id)
 );
+
+select * from alunoAcademia;
+

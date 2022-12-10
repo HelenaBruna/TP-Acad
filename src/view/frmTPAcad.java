@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 public class frmTPAcad implements ActionListener {
 
     private JFrame jf = new JFrame();
@@ -21,6 +23,9 @@ public class frmTPAcad implements ActionListener {
     private JTextField txtNome, txtIdade, txtPeso, txtAltura, txtObjetivo;
 
     private JButton btnMostrarDados, btnIncluir, btnSair, btnLimpar;
+
+    Gson gson = new Gson();
+    String aux = "";
 
     frmTPAcad() {
 
@@ -107,6 +112,7 @@ public class frmTPAcad implements ActionListener {
                 showBox.showMessageDialog(jf, "Aluno não foi incluido");
             }
 
+            aux = gson.toJson(aluno);
         } else if (e.getSource() == btnLimpar) {
             txtNome.setText("");
             txtIdade.setText("");
@@ -116,7 +122,14 @@ public class frmTPAcad implements ActionListener {
         } else if (e.getSource() == btnSair) {
             System.exit(0);
         } else if (e.getSource() == btnMostrarDados) {
-            // TODO
+            JOptionPane showBox = new JOptionPane();
+
+            AlunoAcademia aluno = gson.fromJson(aux, AlunoAcademia.class);
+
+            String msg = "Nome: " + aluno.getNome() + " Idade: " + aluno.getIdade() + " Peso: " + aluno.getPeso()
+                    + " Altura: " + aluno.getAltura() + " Objetivo: " + aluno.getObjetivo();
+
+            showBox.showMessageDialog(jf, msg);
         }
 
     }
